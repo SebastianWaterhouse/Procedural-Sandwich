@@ -14,6 +14,6 @@ Step 4: Navigate to this folder with a command prompt.
 
 Step 5: Type in `python proceduralsandwich.py`
 
-Lastly
-======
+Have Fun!
+=========
 Have fun making potentially really good/bad sandwiches! Open an issue or email me at littlestllama6@gmail.com if you have suggestions or bugs!

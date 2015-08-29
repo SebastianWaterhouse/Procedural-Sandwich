@@ -1,89 +1,78 @@
 import random, time, sys
+import toppings as top
 
 again=1
 unlock_special_weird=0
 
-vowels = ["a", "e", "i", "o", "u"]
-meats=["beef", "porkchop", "bologna", "chicken", "salami", "sausage", "ham", "turkey"]
-weirdmeats=["soylent green", "vortex meat", "frog meat", "rattlesnake meat", "spam", "crawdad meat", "racoon meat", "kangaroo meat", "pheasant meat", "opossum meat", "oyster", "clam", "gizzard", "hamster meat", "horse meat"]
-cheeses=["cheddar", "swiss", "blue", "feta", "goat", "havarti", "provolone", "pepper jack", "gouda", "limburger", "colby"]
-weirdcheeses=["scream", "vortex", "soy", "brown", "almond", "mini"]
-breads=["white", "pretzel", "baguette", "potato", "dark", "curry", "tortilla", "croissant"]
-weirdbreads=["vortex bread", "plywood", "surfboard", "graham cracker", "pancake", "waffle", "styrofoam", "bacon"]
-vegetables=["lettuce", "tomato", "bean sprout", "onion", "pickle", "avocado"]
-weirdvegetables=["brussel sprout", "green bean", "vortex veggie"]
-fillings=["m", "c", "v", "m c", "v c", "v m", "v m c"]
-heats=["heated up ", "", "toasted "]
-weirdheats=["literally on fire ", "absolute 0 ", "broiled ", "wet ", "suveed "]
-weirds = weirdmeats + weirdcheeses
+weirds = top.weirdmeats + top.weirdcheeses
 
 weirdss = " ".join(weirds)
-weirdbreadss = " ".join(weirdbreads)
+weirdbreadss = " ".join(top.weirdbreads)
 
 while again==1:
     grammar = 0
     if unlock_special_weird==1:
-        meats = meats + weirdmeats
-        cheeses = cheeses + weirdcheeses
-        vegetables = vegetables + weirdvegetables
-        breads = breads + weirdbreads
-        heats = heats + weirdheats
+        top.meats = top.meats + top.weirdmeats
+        top.cheeses = top.cheeses + top.weirdcheeses
+        top.vegetables = top.vegetables + top.weirdvegetables
+        top.breads = top.breads + top.weirdbreads
+        top.heats = top.heats + top.weirdheats
         unlock_special_weird = 2
     if unlock_special_weird==3:
-        meats = list(set(meats) - set(weirdmeats))
-        cheeses = list(set(cheeses) - set(weirdcheeses))
-        vegetables = list(set(vegetables) - set(weirdvegetables))
-        breads = list(set(breads) - set(weirdbreads))
-        heats = list(set(heats) - set(weirdheats))
+        top.meats = list(set(top.meats) - set(top.weirdmeats))
+        top.cheeses = list(set(top.cheeses) - set(top.weirdcheeses))
+        top.vegetables = list(set(top.vegetables) - set(top.weirdvegetables))
+        top.breads = list(set(top.breads) - set(top.weirdbreads))
+        top.heats = list(set(top.heats) - set(top.weirdheats))
         unlock_special_weird=0
-    heated = random.choice(heats)
-    filling_type_s = random.choice(fillings)
+    heated = random.choice(top.heats)
+    filling_type_s = random.choice(top.fillings)
     filling_type_l = len(filling_type_s.replace(" ", ""))
     filling = ""
     if "m" in filling_type_s:
-        meat = random.choice(meats)
+        meat = random.choice(top.meats)
         filling = filling + meat
-        if meat[0] in vowels: grammar = 1
+        if meat[0] in top.vowels: grammar = 1
     if "v" in filling_type_s:
-        vegetable = random.choice(vegetables)
+        vegetable = random.choice(top.vegetables)
         if filling_type_l >= 2:
             if filling_type_l >=3:
                 filling = filling + ", "
             elif "m" in filling_type_s:
                 filling = filling + " and "
             else:
-                if vegetable in vowels: grammar = 1
+                if vegetable in top.vowels: grammar = 1
         else:
-            if vegetable in vowels: grammar = 1
+            if vegetable in top.vowels: grammar = 1
         filling = filling + vegetable
     if "c" in filling_type_s:
-        cheese = random.choice(cheeses)
+        cheese = random.choice(top.cheeses)
         if filling_type_l >= 2:
             if filling_type_l == 3:
                 filling = filling + ", and "
             else:
                 filling = filling + " and "
         else:
-            if cheese[0] in vowels: grammar = 1
+            if cheese[0] in top.vowels: grammar = 1
         filling = filling + cheese
-    bread = random.choice(breads)
+    bread = random.choice(top.breads)
     if "c" in filling_type_s:
         filling = filling + " cheese"
 
     if any(word in weirdss for word in filling.split()):
         print("Warning! Weird Toppings!")
         time.sleep(2)
-    if any(wordb in weirdbreads for wordb in bread.split()):
+    if any(wordb in top.weirdbreads for wordb in bread.split()):
         print("Warning! Weird Bread!")
         time.sleep(2)
-    if any(wordh in weirdheats for wordh in heated.split()):
+    if any(wordh in top.weirdheats for wordh in heated.split()):
         print("Warning! Weird Heat/Texture!")
         time.sleep(2)
 
     if unlock_special_weird == 2:
-        if heated in (heats[4]): grammar = 1
-        if heated not in (heats[4]): grammar = 0
-    if heated not in (heats[1]): grammar = 0
+        if heated in (top.heats[4]): grammar = 1
+        if heated not in (top.heats[4]): grammar = 0
+    if heated not in (top.heats[1]): grammar = 0
 
     if grammar == 0:
         grammara = "a "
