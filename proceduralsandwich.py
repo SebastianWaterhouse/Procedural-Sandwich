@@ -5,15 +5,16 @@ unlock_special_weird=0
 
 vowels = ["a", "e", "i", "o", "u"]
 meats=["beef", "porkchop", "bologna", "chicken", "salami", "sausage", "ham", "turkey"]
-weirdmeats=["soylent green", "vortex meat"]
-cheeses=["cheddar", "swiss", "blue", "feta", "goat", "havarti", "provolone", "pepper jack", "gouda", "limburger"]
-weirdcheeses=["scream", "vortex"]
-breads=["white", "pretzel", "baguette", "potato", "dark", "curry", "tortilla"]
-weirdbreads=["vortex bread", "plywood", "surfboard", "graham cracker", "pancake", "waffle"]
+weirdmeats=["soylent green", "vortex meat", "frog meat", "rattlesnake meat", "spam", "crawdad meat", "racoon meat", "kangaroo meat", "pheasant meat", "opossum meat", "oyster", "clam", "gizzard", "hamster meat", "horse meat"]
+cheeses=["cheddar", "swiss", "blue", "feta", "goat", "havarti", "provolone", "pepper jack", "gouda", "limburger", "colby"]
+weirdcheeses=["scream", "vortex", "soy", "brown", "almond", "mini"]
+breads=["white", "pretzel", "baguette", "potato", "dark", "curry", "tortilla", "croissant"]
+weirdbreads=["vortex bread", "plywood", "surfboard", "graham cracker", "pancake", "waffle", "styrofoam", "bacon"]
 vegetables=["lettuce", "tomato", "bean sprout", "onion", "pickle", "avocado"]
 weirdvegetables=["brussel sprout", "green bean", "vortex veggie"]
 fillings=["m", "c", "v", "m c", "v c", "v m", "v m c"]
 heats=["heated up ", "", "toasted "]
+weirdheats=["literally on fire ", "absolute 0 ", "broiled ", "wet ", "suveed "]
 weirds = weirdmeats + weirdcheeses
 
 weirdss = " ".join(weirds)
@@ -25,11 +26,15 @@ while again==1:
         meats = meats + weirdmeats
         cheeses = cheeses + weirdcheeses
         vegetables = vegetables + weirdvegetables
+        breads = breads + weirdbreads
+        heats = heats + weirdheats
         unlock_special_weird = 2
     if unlock_special_weird==3:
         meats = list(set(meats) - set(weirdmeats))
         cheeses = list(set(cheeses) - set(weirdcheeses))
         vegetables = list(set(vegetables) - set(weirdvegetables))
+        breads = list(set(breads) - set(weirdbreads))
+        heats = list(set(heats) - set(weirdheats))
         unlock_special_weird=0
     heated = random.choice(heats)
     filling_type_s = random.choice(fillings)
@@ -70,8 +75,15 @@ while again==1:
         time.sleep(2)
     if any(wordb in weirdbreads for wordb in bread.split()):
         print("Warning! Weird Bread!")
+        time.sleep(2)
+    if any(wordh in weirdheats for wordh in heated.split()):
+        print("Warning! Weird Heat/Texture!")
+        time.sleep(2)
 
-    if heated not in heats[1]: grammar = 0
+    if unlock_special_weird == 2:
+        if heated in (heats[4]): grammar = 1
+        if heated not in (heats[4]): grammar = 0
+    if heated not in (heats[1]): grammar = 0
 
     if grammar == 0:
         grammara = "a "
@@ -82,7 +94,34 @@ while again==1:
     time.sleep(1)
     again_a = input("Go again? Type Y for yes, N for no, or type S to toggle Special Weirdness Mode! ")
     again_a = again_a.lower()
-    if again_a == "n":
+    if again_a == "d":
+        print("Printing debug stuff...")
+        try:
+            print(vegetable)
+        except NameError:
+            pass
+        try:
+            print(meat)
+        except NameError:
+            pass
+        try:
+            print(bread)
+        except NameError:
+            pass
+        try:
+            if heated == "": print("No heating")
+            else: print(heated)
+        except NameError:
+            pass
+        try:
+            print(grammar)
+        except NameError:
+            pass
+        try:
+            print(grammara)
+        except NameError:
+            pass
+    elif again_a == "n":
         again=0
         sys.exit("Exited with code 0")
     elif again_a == "s":
@@ -92,7 +131,3 @@ while again==1:
         else:
             print("Warning! Special Weirdness Mode stays the entire session, but the toppings have the same chance to appear as any other topping!")
             unlock_special_weird=1
-
-    if "v" in filling_type_s: del vegetable
-    if "m" in filling_type_s: del meat
-    if "c" in filling_type_s: del cheese
