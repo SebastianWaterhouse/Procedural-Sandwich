@@ -4,7 +4,7 @@ Procedural Sandwich is a procedural text-based sandwich generator made from pyth
 
 Running the Program
 ===================
-Step 1: Downloading python 3.4 at https://www.python.org/downloads/
+Step 1: Download python 3.4 at https://www.python.org/downloads/
 
 Step 2: Either clone the repository if you already have git, or download the ZIP via the handy "Download ZIP" button on the github site.
 
