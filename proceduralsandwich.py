@@ -1,122 +1,130 @@
 import random, time, sys
-import toppings as top
+
+class flavors(object):
+    def __init__(self, name, goes_with, favored_heat):
+        self.name = name
+        self.goes_with = goes_with
+        self.favored_heat = favored_heat
+umami = flavors(name = "umami", goes_with = ["spicy", "tangy", "salty", "bitter", "sweet"], favored_heat = 1)
+savory = flavors(name = "savory", goes_with = ["leafy", "salty", "spicy", "sweet"], favored_heat = 1)
+tangy = flavors(name = "tangy", goes_with = ["umami", "spicy", "eggy", "salty", "bitter"], favored_heat = 2)
+spicy = flavors(name = "spicy", goes_with = ["tangy", "leafy", "savory", "umami", "salty"], favored_heat = 2)
+bitter = flavors(name = "bitter", goes_with = ["umami", "spicy", "tangy", "salty"], favored_heat = 2)
+salty = flavors(name = "salty", goes_with = ["umami", "spicy", "savory", "eggy", "bitter", "salty"], favored_heat = 0)
+sweet = flavors(name = "sweet", goes_with = ["tangy", "eggy", "savory", "salty", "umami"], favored_heat = 0)
+eggy = flavors(name = "eggy", goes_with = ["salty", "sweet"], favored_heat = 0)
+
+vowels = {"a", "e", "i", "o", "u"}
+ameats={"beef":umami, "hard_boiled_egg_slice":eggy, "porkchop":savory, "bologna":tangy, "chicken":umami, "salami":tangy, "ham":umami, "turkey":savory, "andouille_sausage":spicy}
+acheeses={"cheddar":tangy, "swiss":savory, "blue":tangy, "feta":salty, "goat":tangy, "havarti":sweet, "provolone":salty, "gouda":sweet, "colby":sweet}
+breads=["white", "pretzel", "baguette", "potato", "dark", "curry", "tortilla", "croissant"]
+avegetables={"lettuce":bitter, "tomato":sweet, "onion":bitter, "pickle":salty, "avocado":eggy}
+fillings=["m", "c", "v", "m c", "v c", "v m", "v m c"]
+heats={0:"", 1:"heated_up ", 2:"toasted "}
+
 
 again=1
 unlock_special_weird=0
 
-weirds = top.weirdmeats + top.weirdcheeses
-
-weirdss = " ".join(weirds)
-weirdbreadss = " ".join(top.weirdbreads)
-
 while again==1:
+    meats = ameats.copy()
+    vegetables = avegetables.copy()
+    cheeses = acheeses.copy()
     grammar = 0
-    if unlock_special_weird==1:
-        top.meats = top.meats + top.weirdmeats
-        top.cheeses = top.cheeses + top.weirdcheeses
-        top.vegetables = top.vegetables + top.weirdvegetables
-        top.breads = top.breads + top.weirdbreads
-        top.heats = top.heats + top.weirdheats
-        unlock_special_weird = 2
-    if unlock_special_weird==3:
-        top.meats = list(set(top.meats) - set(top.weirdmeats))
-        top.cheeses = list(set(top.cheeses) - set(top.weirdcheeses))
-        top.vegetables = list(set(top.vegetables) - set(top.weirdvegetables))
-        top.breads = list(set(top.breads) - set(top.weirdbreads))
-        top.heats = list(set(top.heats) - set(top.weirdheats))
-        unlock_special_weird=0
-    heated = random.choice(top.heats)
-    filling_type_s = random.choice(top.fillings)
-    filling_type_l = len(filling_type_s.replace(" ", ""))
+    grammara = "a"
     filling = ""
-    if "m" in filling_type_s:
-        meat = random.choice(top.meats)
-        filling = filling + meat
-        if meat[0] in top.vowels: grammar = 1
-    if "v" in filling_type_s:
-        vegetable = random.choice(top.vegetables)
-        if filling_type_l >= 2:
-            if filling_type_l >=3:
-                filling = filling + ", "
-            elif "m" in filling_type_s:
-                filling = filling + " and "
-            else:
-                if vegetable in top.vowels: grammar = 1
-        else:
-            if vegetable in top.vowels: grammar = 1
-        filling = filling + vegetable
-    if "c" in filling_type_s:
-        cheese = random.choice(top.cheeses)
-        if filling_type_l >= 2:
-            if filling_type_l == 3:
-                filling = filling + ", and "
-            else:
-                filling = filling + " and "
-        else:
-            if cheese[0] in top.vowels: grammar = 1
-        filling = filling + cheese
-    bread = random.choice(top.breads)
-    if "c" in filling_type_s:
-        filling = filling + " cheese"
+    bread = "".join(random.sample(list(breads), 1))
+    meata = random.sample(list(meats), 1)
+    meat = "".join(meata)
+    filling = filling + meat
+    meatb = meats[meat]
+    eliminatem = list(meatb.goes_with)
+    eliminatemm = " ".join(eliminatem)
+    meggiekiller = ""
+    for meg in vegetables.keys():
+        megs = str(vegetables[meg].name)
+        if any(kill for kill in megs if megs not in eliminatem):
+            meggiekiller = meggiekiller + " " + meg
+    thingeel = 0
+    gol = 1
+    while gol == 1:
+        try:
+            del vegetables[meggiekiller.split()[thingeel]]
+            thingeel = thingeel + 1
+        except IndexError:
+            gol = 0
+    meesekiller = ""
+    for mee in cheeses.keys():
+        mees = str(cheeses[mee].name)
+        if any(killkill for killkill in mees if mees not in eliminatem):
+            meesekiller = meesekiller + " " + mee
+    thingiel = 0
+    go = 1
+    heatedm = meatb.favored_heat
+    probable = [heatedm]
+    while go == 1:
+        try:
+            del cheeses[meesekiller.split()[thingiel]]
+            thingiel = thingiel + 1
+        except IndexError:
+            go = 0
 
-    if any(word in weirdss for word in filling.split()):
-        print("Warning! Weird Toppings!")
-        time.sleep(2)
-    if any(wordb in top.weirdbreads for wordb in bread.split()):
-        print("Warning! Weird Bread!")
-        time.sleep(2)
-    if any(wordh in top.weirdheats for wordh in heated.split()):
-        print("Warning! Weird Heat/Texture!")
-        time.sleep(2)
+    try:
+        vegetablea = random.sample(list(vegetables), 1)
+    except ValueError:
+        vegetablea = "tomato"
+        vegetables["tomato"] = sweet
+    vegetable = "".join(vegetablea)
+    filling = filling + ", " + vegetable
+    vegetableb = vegetables[vegetable]
+    eliminatev = list(vegetableb.goes_with)
+    veesekiller = ""
+    for vee in cheeses.keys():
+        vees = str(cheeses[vee].name)
+        if any(killkillkill for killkillkill in vees if vees not in eliminatev):
+            veesekiller = veesekiller + " " + vee
+    thingoel = 0
+    gob = 1
+    heatedv = vegetableb.favored_heat
+    while gob == 1:
+        try:
+            del cheeses[veesekiller.split()[thingoel]]
+            thingoel = thingoel + 1
+        except IndexError:
+            gob = 0
+    probable = [heatedv]
 
-    if unlock_special_weird == 2:
-        if heated in (top.heats[4]): grammar = 1
-        if heated not in (top.heats[4]): grammar = 0
-    if heated not in (top.heats[1]): grammar = 0
+    try:
+        cheesea = random.sample(list(cheeses), 1)
+    except ValueError:
+        cheesea = ["cheddar"]
+        cheeses["cheddar"] = tangy
+    cheese = "".join(cheesea)
+    filling = filling + ", and " + cheese
+    cheeseb = cheeses[cheese]
+    heatedc = cheeseb.favored_heat
+    filling = filling + " cheese"
 
+    probable = [heatedc]
+    probable = sum(probable)/len(probable)
+    probable = round(probable)
+
+    heated = heats[int(probable)]
+
+    importance = heated + filling
+    importance = importance.replace("_", " ")
+
+    if importance[0] in vowels:
+        grammar = 1
     if grammar == 0:
         grammara = "a "
     if grammar == 1:
         grammara = "an "
 
-    print("You got " + grammara + heated + filling + " sandwich on " + bread + " bread!")
+    print("You got " + grammara + importance + " sandwich on " + bread + " bread!")
     time.sleep(1)
-    again_a = input("Go again? Type Y for yes, N for no, or type S to toggle Special Weirdness Mode! ")
+    again_a = input("Go again? Type N for no, or anything else for yes. ")
     again_a = again_a.lower()
-    if again_a == "d":
-        print("Printing debug stuff...")
-        try:
-            print(vegetable)
-        except NameError:
-            pass
-        try:
-            print(meat)
-        except NameError:
-            pass
-        try:
-            print(bread)
-        except NameError:
-            pass
-        try:
-            if heated == "": print("No heating")
-            else: print(heated)
-        except NameError:
-            pass
-        try:
-            print(grammar)
-        except NameError:
-            pass
-        try:
-            print(grammara)
-        except NameError:
-            pass
-    elif again_a == "n":
+    if again_a == "n":
         again=0
         sys.exit("Exited with code 0")
-    elif again_a == "s":
-        if unlock_special_weird==1:
-            print("Special Weirdness Mode is now off!")
-            unlock_special_weird=3
-        else:
-            print("Warning! Special Weirdness Mode stays the entire session, but the toppings have the same chance to appear as any other topping!")
-            unlock_special_weird=1
