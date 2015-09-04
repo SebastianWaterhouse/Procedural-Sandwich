@@ -1,10 +1,10 @@
 # Procedural-Sandwich
 =====================
-Procedural Sandwich is a procedural text-based sandwich generator made from python.
+Procedural Sandwich is a procedural text-based (/picture based) sandwich generator made from python.
 
 NOTE
 ====
-This is the `flavors` branch. This is experimental and doesn't have as many toppings, weird mode is disabled, but sandwiches should be more likely to be yummy. The default vegetable is `tomato` and the default cheese is `cheddar`.
+This is the `pictures` branch. This is experimental and doesn't have as many toppings, weird mode is disabled, but sandwiches do have pictures saved in `out.png`
 
 Running the Program
 ===================
