@@ -1,4 +1,6 @@
-nameof = "game idea"
+import toppingchoose as top
+
+nameof = "game" #REQUIRED
 variablesno = 4
 interface = ["2D", "3D", "Isometric", "Text-based"]
 types = {
@@ -15,4 +17,20 @@ types = {
 artstyles = ["Cartoony", "Realistic", "Gritty", "8-Bit"]
 genres = ["Sci-Fi", "Fantasy"]
 
-variables = [interface, types, artstyles, genres]
+variables = { #REQUIRED - SEE toppingchoose.py for valid types. If you want a new type, open an issue on Github.
+	"types":"dictlist",
+	"interface":"list",
+	"artstyles":"list",
+	"genres":"list"
+}
+
+controllers = { #REQUIRED
+	"types":interface
+}
+
+varsy = list(variables)
+
+def makeSentence():
+	template = ["a " + 0 + " " + 2 + " " + 1 + " in a " + 3 + " setting."] #REQUIRED
+
+#Controllers MUST go before what they control AND be a dict containing values matching up to what is in what they control.
