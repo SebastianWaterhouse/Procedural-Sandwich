@@ -5,14 +5,14 @@ import toppingchoose as topchoose
 again = True
 
 while again:
+	variables = []
+	sentence = ""
 	cont = True
 	toprint = "You got a " + what.nameof
 	topchoose.choose()
-	for var in topchoose.variables:
-		print(var)
-		toprint = toprint + var
-	print(toprint)
-	topchoose.variables = []
+	print(topchoose.variables)
+	topchoose.makesentence()
+	print(topchoose.sentence)
 	againq = input("Do you want another one? Y/N: ")
 	while cont:
 		if againq.lower() == "n":

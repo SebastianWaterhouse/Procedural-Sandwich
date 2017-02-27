@@ -28,9 +28,6 @@ controllers = { #REQUIRED
 	"types":interface
 }
 
-varsy = list(variables)
-
-def makeSentence():
-	template = ["a " + 0 + " " + 2 + " " + 1 + " in a " + 3 + " setting."] #REQUIRED
+template = ["a ", 0, " ", 2, " ", 1, " in a ", 3, " setting."] #REQUIRED
 
 #Controllers MUST go before what they control AND be a dict containing values matching up to what is in what they control.

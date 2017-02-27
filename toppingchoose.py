@@ -2,6 +2,7 @@ import random
 import whatmake as what
 
 variables = []
+sentence = ""
 def choose():
 	for b in what.variables:
 		if what.variables[b] == "list":
@@ -15,3 +16,10 @@ def choose():
 			variables.append(a)
 			if b in what.controllers:
 				what.controllers[b] = ba[a]
+
+def makesentence():
+	for d in what.template:
+		if type(d) is int:
+			d = variables[d]
+		sentence = sentence + str(d)
+		print(sentence)
