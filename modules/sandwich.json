@@ -1,0 +1,14 @@
+{
+	"toppings":
+	{
+		"list":
+		{
+			"meats":["beef", "porkchop", "bologna", "chicken", "salami", "sausage", "ham", "turkey"],
+			"cheeses":["cheddar", "swiss", "blue", "feta", "goat", "havarti", "provolone", "pepper jack", "gouda", "limburger", "colby"],
+			"breads":["white", "pretzel", "baguette", "potato", "dark", "curry", "tortilla", "croissant"],
+			"vegetables":["lettuce", "tomato", "bean sprout", "onion", "pickle", "avocado"],
+			"heats":["heated up", "", "toasted"]
+		}
+	},
+	"template":["You got a ", "heats", " ", "meats", ", ", "cheeses", ", and ", "vegetables", " sandwich on ", "breads", " bread."]
+}
