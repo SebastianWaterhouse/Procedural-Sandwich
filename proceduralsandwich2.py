@@ -4,6 +4,12 @@ import toppingchoose as topchoose
 
 again = True
 
+toload = input("What json module do you want to import? Leave blank for sandwich: ")
+if toload == "":
+	toload = "sandwich.json"
+
+toloadq()
+
 while again:
 	topchoose.variables = []
 	topchoose.sentence = ""

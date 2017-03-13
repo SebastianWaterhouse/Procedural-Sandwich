@@ -27,7 +27,6 @@ variables = { #REQUIRED - SEE toppingchoose.py for valid types. If you want a ne
 controllers = { #REQUIRED
 	"types":interface
 }
-
 template = ["A ", 1, " ", 2, " ", 0, " in a ", 3, " setting."] #REQUIRED
 
 #Controllers MUST go before what they control AND be a dict containing values matching up to what is in what they control.
