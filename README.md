@@ -16,4 +16,4 @@ Step 5: Type in `python proceduralsandwich.py`
 
 Have Fun!
 =========
-Have fun making potentially really good/bad sandwiches! Open an issue or email me at littlestllama6@gmail.com if you have suggestions or bugs!
+Have fun making potentially really good/bad sandwiches! Open an issue or email me at sebastian.g.waterhouse@gmail.com if you have suggestions or bugs!
